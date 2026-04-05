@@ -1,0 +1,55 @@
+[module]
+name = "su_yolo"
+repo_root = "repositories/snn-underwater"
+paper_pdf = "papers/2503.24389.pdf"
+paper_txt = "papers/2503.24389.txt"
+
+[train]
+python = "python3"
+script = "train.py"
+cfg = "models/detect/su-yolo.yaml"
+data = "data/urpc.yaml"
+hyp = "data/hyps/hyp.scratch-high.yaml"
+weights = ""
+project = "runs/train"
+run_name = "debug"
+time_step = 4
+epochs = 1
+batch_size = 2
+img_size = 160
+device = "cpu"
+workers = 0
+
+[evaluate]
+python = "python3"
+script = "val.py"
+data = "data/urpc.yaml"
+weights = "runs/train/debug/weights/best.pt"
+img_size = 160
+batch_size = 2
+device = "cpu"
+
+[infer]
+python = "python3"
+script = "detect.py"
+source = ""
+weights = "runs/train/debug/weights/best.pt"
+img_size = 160
+conf_thres = 0.25
+device = "cpu"
+
+[export]
+python = "python3"
+script = "export.py"
+weights = "runs/train/debug/weights/best.pt"
+img_size = 160
+device = "cpu"
+include = "onnx"
+
+[targets]
+urpc_map50 = 0.788
+urpc_map5095 = 0.429
+udd_map50 = 0.582
+udd_map5095 = 0.266
+params_m = 6.97
+energy_mj = 2.98

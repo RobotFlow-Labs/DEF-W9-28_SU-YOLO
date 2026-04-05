@@ -1,0 +1,10 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+COPY src /app/src
+COPY pyproject.toml /app/pyproject.toml
+
+ENV PYTHONPATH=/app/src
+EXPOSE 8080
+
+CMD ["python3", "-c", "from anima_su_yolo.serve import app; print('Service scaffold ready, integrate uvicorn in deployment stage')"]

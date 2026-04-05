@@ -1,0 +1,25 @@
+name: su_yolo
+module_type: defense_detection
+version: 0.1.0
+framework: pytorch
+paper:
+  title: SU-YOLO: Spiking Neural Network for Efficient Underwater Object Detection
+  arxiv: "2503.24389"
+runtime:
+  train_cmd: "python3 scripts/train.py --config configs/paper.toml"
+  eval_cmd: "python3 scripts/evaluate.py --config configs/paper.toml"
+  infer_cmd: "python3 scripts/infer.py --config configs/paper.toml"
+  export_cmd: "python3 scripts/export.py --config configs/paper.toml"
+io:
+  inputs:
+    - name: image
+      type: image
+      encoding: rgb
+  outputs:
+    - name: detections
+      type: bbox_list
+      classes:
+        - echinus
+        - holothurian
+        - scallop
+        - starfish

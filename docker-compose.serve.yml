@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  su-yolo-serve:
+    build:
+      context: .
+      dockerfile: Dockerfile.serve
+    container_name: su-yolo-serve
+    ports:
+      - "8080:8080"
+    environment:
+      - PYTHONPATH=/app/src
+    restart: unless-stopped
